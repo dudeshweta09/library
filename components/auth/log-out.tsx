@@ -8,9 +8,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import ProfileData from "./profile-data";
 
 const LogOut = () => {
   const router = useRouter();
+
   return (
     <div>
       <Popover>
@@ -20,19 +22,25 @@ const LogOut = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent className=" w-full mx-auto">
+          <ProfileData/><br/>
           <Button
-            className="w-1/2 font-medium text-xl mb-4">
-            Profile
-          </Button><br/>
-          <Button
-            className="w-1/2 font-medium text-xl"
+            className="w-full mx-auto font-medium text-l mb-4 text-white"
             onClick={() => {
               localStorage.setItem("loggedIn", JSON.stringify(false)),
                 router.push("/");
             }}
           >
             Log Out
+          </Button><br/>
+          <Button
+            className="w-full mx-auto font-medium text-l text-white"
+            onClick={() => {
+              localStorage.clear(),
+                router.push("/");
+            }}
+          >
+            Delete A/C
           </Button>
         </PopoverContent>
       </Popover>
