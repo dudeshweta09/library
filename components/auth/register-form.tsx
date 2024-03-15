@@ -15,8 +15,10 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { any, z } from "zod";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -28,7 +30,6 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (values:z.infer<typeof RegisterSchema>) => {
-    console.log(values.email);
     const existAccount = JSON.parse(
       localStorage.getItem("UserDetails") || "[]"
     );
@@ -42,6 +43,8 @@ const RegisterForm = () => {
     }
     existAccount.push(values);
     localStorage.setItem("UserDetails", JSON.stringify(existAccount));
+    alert("Registered!")
+    router.push("/"); 
   };
   return (
     <CardWrapper
