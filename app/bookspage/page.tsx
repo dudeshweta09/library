@@ -5,7 +5,7 @@ const BooksPage = () => {
   return (
     <AuthGuard>
       <>
-      <div className=" bg-white rounded-md py-8 w-9/12 mx-auto mt-10">
+      <div className=" bg-teal-50 rounded-md py-8 w-9/12 mx-auto mt-10">
         <SearchBook searchParams={""} />
       </div>
       </>

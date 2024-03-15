@@ -37,8 +37,8 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
     setSearch(e.target.value)
   };
   return (console.log(searchResult),
-    <div>
-        <div className="flex mx-auto w-full max-w-sm items-center space-x-2">
+    <div className=" w-7/12 mx-auto">
+        <div className="flex mx-auto w-full max-w-md items-center space-x-2">
           <Input
           className=" text-lg"
             value={search}
@@ -50,14 +50,14 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
           </Button>
           <LogOut/>
         </div>
-        <div>{search.length > 0 && <ol>{searchResult.map((item)=>{
-          return(<div className=" w-4/5 mx-auto mt-2 grid grid-cols-4 gap-4">
-            <span>Title - {item.title} </span>
-            <span>Author Name - {item.author_name} </span>
-            <span>E-Book Access - {item.ebook_access} </span>
-            <span>Ratings - {item.ratings_count} </span>
+        <div className=" w-full">{search.length > 0 && <div className=" w-full">{searchResult.map((item)=>{
+          return(<div className=" w-full mx-auto mt-2 grid grid-cols-4 gap-2">
+            <span className=""><b>Title</b> - {item.title} </span>
+            <span className=" text-center"><b>Author Name</b> - {item.author_name} </span>
+            <span className=" text-center"><b>E-Book Access</b> - {item.ebook_access} </span>
+            <span className=" text-center"><b>Ratings</b> - {item.ratings_count} </span>
           </div>)
-        })}</ol>}</div>
+        })}</div>}</div>
     </div>
   );
 };
