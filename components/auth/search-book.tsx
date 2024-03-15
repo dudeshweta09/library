@@ -48,6 +48,7 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
           <Button className=" text-xl" type="button" onClick={() => handleClick(search)}>
             Search
           </Button>
+          <LogOut/>
         </div>
         <div>{search.length > 0 && <ol>{searchResult.map((item)=>{
           return(<div className=" w-4/5 mx-auto mt-2 grid grid-cols-4 gap-4">
@@ -57,7 +58,6 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
             <span>Ratings - {item.ratings_count} </span>
           </div>)
         })}</ol>}</div>
-        <LogOut />
     </div>
   );
 };
