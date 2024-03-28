@@ -13,6 +13,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+
+
 export interface SearchBookProps {
   searchParams: string;
 }
@@ -42,7 +44,7 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
     }
   };
 
-  const onKeyDown = (e) =>{
+  const onKeyDown = (e: { key: string; }) =>{
     if(e.key == 'Enter'){
       handleClick(search);
     }

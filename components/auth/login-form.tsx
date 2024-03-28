@@ -15,8 +15,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
+import { useToast } from "@/components/ui/use-toast"
+
 
 const LoginForm = () => {
+  const {toast} = useToast();
   const router = useRouter();
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     const getdata = JSON.parse(localStorage.getItem("Lib_UserDetails") ?? "[]");
@@ -26,12 +29,21 @@ const LoginForm = () => {
       })?.length > 0;
     if (loggedIn) {
       localStorage.setItem("Lib_loggedIn", JSON.stringify(true));
-      alert("you are loggedIn");
+      toast({
+        description:"You are Logged-In"
+      })
       router.push("/bookspage");
     } else {
-      alert("Invalid Credentials");
+      toast({
+        description:"Invalid Credentials...."
+      })
     }
   };
+  const onKeyDown = (e: { key: string; }) =>{
+    if(e.key == 'Enter'){
+      onSubmit
+    }
+  }
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -54,12 +66,13 @@ const LoginForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="xl:text-xl">Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type="email"
                       placeholder="example@gamil.com"
+                      className="xl:text-md"
                     />
                   </FormControl>
                   <FormMessage />
@@ -71,16 +84,16 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="xl:text-xl">Password</FormLabel>
                   <FormControl>
-                    <Input {...field} type="password" placeholder="john@1234" />
+                    <Input {...field} className="xl:text-md" onKeyDown={onKeyDown} type="password" placeholder="john@1234" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full xl:text-xl">
             LogIn
           </Button>
         </form>

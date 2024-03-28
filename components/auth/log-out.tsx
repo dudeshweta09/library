@@ -25,7 +25,7 @@ const LogOut = () => {
         <PopoverContent className=" w-full mx-auto">
           <ProfileData/><br/>
           <Button
-            className="w-full mx-auto font-medium text-l mb-4 text-white"
+            className="w-full mx-auto font-medium text-l mb-4 text-white hover:bg-purple-100 hover:text-black transition-all duration-300 delay-150"
             onClick={() => {
               localStorage.setItem("Lib_loggedIn", JSON.stringify(false)),
                 router.push("/");
@@ -34,9 +34,10 @@ const LogOut = () => {
             Log Out
           </Button><br/>
           <Button
-            className="w-full mx-auto font-medium text-l text-white"
+            className="w-full mx-auto font-medium text-l text-white hover:bg-purple-100 hover:text-black transition-all duration-300 delay-150"
             onClick={() => {
-              localStorage.clear(),
+              localStorage.removeItem('Lib_UserDetails'),
+              localStorage.removeItem('Lib_loggedIn'),
                 router.push("/");
             }}
           >

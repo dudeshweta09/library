@@ -29,7 +29,7 @@ const ProfileData = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-3/4 mx-auto font-medium text-l mb-4 text-white">
+        <Button className=" hover:bg-purple-100 hover:text-black transition-all duration-300 delay-150 w-3/4 mx-auto font-medium text-l mb-4 text-white">
           Profile
         </Button>
       </DialogTrigger>

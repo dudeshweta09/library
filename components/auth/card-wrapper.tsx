@@ -24,7 +24,7 @@ const CardWrapper = ({
   children,
 }: CardWrapperProps) => {
   return (
-    <Card style={{}} className="xl:W-1/4 md:w-1/2 shadow-md mx-auto">
+    <Card style={{}} className="xl:W-1/4 xl:text-xl md:w-1/2 shadow-md mx-auto">
       <CardHeader>
         <AuthHeader label={label} title={title} />
       </CardHeader>

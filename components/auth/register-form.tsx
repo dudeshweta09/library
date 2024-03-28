@@ -3,7 +3,6 @@ import CardWrapper from "./card-wrapper";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,10 +13,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { any, z } from "zod";
+import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast"
 
 const RegisterForm = () => {
+  const {toast} = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -37,13 +38,17 @@ const RegisterForm = () => {
       const emailValue = Object.values(existAccount);
       for (const id of emailValue) {
         if (id.email === values.email) {
-          return alert("Account already exist!");
+          return toast({
+            description:"Account already Exist..."
+          })
         }
       }
     }
     existAccount.push(values);
     localStorage.setItem("Lib_UserDetails", JSON.stringify(existAccount));
-    alert("Registered!")
+    toast({
+      description:"Registered!!"
+    })
     router.push("/"); 
   };
   return (
@@ -61,7 +66,7 @@ const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <FormLabel htmlFor="email" className="xl:text-xl">Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -79,7 +84,7 @@ const RegisterForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel className="xl:text-xl">Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -95,7 +100,7 @@ const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="xl:text-xl">Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -112,7 +117,7 @@ const RegisterForm = () => {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel className="xl:text-xl">Confirm Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -125,7 +130,7 @@ const RegisterForm = () => {
               )}
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full xl:text-xl">
             Register Now
           </Button>
         </form>
