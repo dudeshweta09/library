@@ -31,7 +31,7 @@ const RegisterForm = () => {
 
   const onSubmit = (values:z.infer<typeof RegisterSchema>) => {
     const existAccount = JSON.parse(
-      localStorage.getItem("UserDetails") || "[]"
+      localStorage.getItem("Lib_UserDetails") || "[]"
     );
     if (existAccount) {
       const emailValue = Object.values(existAccount);
@@ -42,7 +42,7 @@ const RegisterForm = () => {
       }
     }
     existAccount.push(values);
-    localStorage.setItem("UserDetails", JSON.stringify(existAccount));
+    localStorage.setItem("Lib_UserDetails", JSON.stringify(existAccount));
     alert("Registered!")
     router.push("/"); 
   };

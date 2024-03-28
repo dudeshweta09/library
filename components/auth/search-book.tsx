@@ -3,6 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import LogOut from "./log-out";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 export interface SearchBookProps {
   searchParams: string;
@@ -33,16 +42,23 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
     }
   };
 
+  const onKeyDown = (e) =>{
+    if(e.key == 'Enter'){
+      handleClick(search);
+    }
+  }
+
   const handleChange = (e: any) => {
     setSearch(e.target.value)
   };
-  return (console.log(searchResult),
+  return (
     <div className=" w-7/12 mx-auto">
         <div className="flex mx-auto w-full max-w-md items-center space-x-2">
           <Input
           className=" text-lg"
             value={search}
             onChange={handleChange}
+            onKeyDown={onKeyDown}
             placeholder="Search your Book"
           />
           <Button className=" text-xl" type="button" onClick={() => handleClick(search)}>
@@ -50,14 +66,29 @@ const SearchBook = ({ searchParams }: SearchBookProps) => {
           </Button>
           <LogOut/>
         </div>
-        <div className=" w-full">{search.length > 0 && <div className=" w-full">{searchResult.map((item)=>{
-          return(<div className=" w-full mx-auto mt-2 grid grid-cols-4 gap-2">
-            <span className=""><b>Title</b> - {item.title} </span>
-            <span className=" text-center"><b>Author Name</b> - {item.author_name} </span>
-            <span className=" text-center"><b>E-Book Access</b> - {item.ebook_access} </span>
-            <span className=" text-center"><b>Ratings</b> - {item.ratings_count} </span>
-          </div>)
-        })}</div>}</div>
+        <div className=" w-full">{search.length > 0 && <div className=" w-full">
+          <Table>
+            <TableCaption><b>A list of your recent search</b></TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]"><b></b>Title</TableHead>
+                <TableHead>Author Name</TableHead>
+                <TableHead>E-Book Access</TableHead>
+                <TableHead>Ratings</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {searchResult.map((item)=>(
+                <TableRow>
+                  <TableCell>{item.title}</TableCell>
+                  <TableCell>{item.author_name}</TableCell>
+                  <TableCell>{item.ebook_access}</TableCell>
+                  <TableCell>{item.ratings_count}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          </div>}</div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const LogOut = () => {
           <Button
             className="w-full mx-auto font-medium text-l mb-4 text-white"
             onClick={() => {
-              localStorage.setItem("loggedIn", JSON.stringify(false)),
+              localStorage.setItem("Lib_loggedIn", JSON.stringify(false)),
                 router.push("/");
             }}
           >

@@ -6,7 +6,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    const loggedIn = localStorage.getItem("loggedIn") ?? "false";
+    const loggedIn = localStorage.getItem("Lib_loggedIn") ?? "false";
     if (loggedIn == "true") {
       setLoggedIn(true);
       router.push("/bookspage");

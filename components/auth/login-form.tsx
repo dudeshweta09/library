@@ -19,13 +19,13 @@ import { z } from "zod";
 const LoginForm = () => {
   const router = useRouter();
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    const getdata = JSON.parse(localStorage.getItem("UserDetails") ?? "[]");
+    const getdata = JSON.parse(localStorage.getItem("Lib_UserDetails") ?? "[]");
     const loggedIn =
       getdata?.filter((ud: z.infer<typeof RegisterSchema>) => {
         return ud.email == values.email && ud.password == values.password;
       })?.length > 0;
     if (loggedIn) {
-      localStorage.setItem("loggedIn", JSON.stringify(true));
+      localStorage.setItem("Lib_loggedIn", JSON.stringify(true));
       alert("you are loggedIn");
       router.push("/bookspage");
     } else {

@@ -13,6 +13,11 @@ export const RegisterSchema = z.object({
     confirmPassword: z.string().min(6,{
         message:"Password must be 6 characters long."
     })
+}).refine((data)=>{
+    return data.password == data.confirmPassword
+},{
+    message: "Password do not match",
+    path: ["confirmPassword"]
 })
 
 export const LoginSchema = z.object({
